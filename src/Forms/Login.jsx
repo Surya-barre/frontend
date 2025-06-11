@@ -12,12 +12,15 @@ const Login = () => {
     const obj = { email, password };
 
     try {
-      const response = await axios.post("http://localhost:3000/api/login", obj);
+      const response = await axios.post(
+        "https://backend-6oku.onrender.com/api/login",
+        obj
+      );
 
       if (response.data.msg === "User not found") {
         return alert("User not found! Please sign up first.");
       }
-       
+
       if (response.data.msg === "Invalid password") {
         return alert("Incorrect email or password. Try again!");
       }
@@ -26,8 +29,8 @@ const Login = () => {
 
         // Save token and user data
         localStorage.setItem("chat-token", response.data.token);
-     localStorage.setItem("user",  response.data.user); // Store full user object
-        
+        localStorage.setItem("user", response.data.user); // Store full user object
+
         navigate("/chat"); // Redirect to chat page
       }
     } catch (error) {

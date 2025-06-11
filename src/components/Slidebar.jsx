@@ -12,11 +12,14 @@ const Slidebar = ({ setchatInitiated, setChats, setReceiverId }) => {
   useEffect(() => {
     const fetchUsers = async () => {
       try {
-        const response = await axios.get("http://localhost:3000/chat/users", {
-          headers: {
-            Authorization: `Bearer ${localStorage.getItem("chat-token")}`,
-          },
-        });
+        const response = await axios.get(
+          "https://backend-6oku.onrender.com/chat/users", // ✅ updated
+          {
+            headers: {
+              Authorization: `Bearer ${localStorage.getItem("chat-token")}`,
+            },
+          }
+        );
         setUsers(response.data.users);
       } catch (err) {
         console.log(err);
@@ -32,11 +35,11 @@ const Slidebar = ({ setchatInitiated, setChats, setReceiverId }) => {
       const user = JSON.parse(localStorage.getItem("user"));
 
       const response = await axios.get(
-        `http://localhost:3000/chat/message/read/${id}`,
+        `https://backend-6oku.onrender.com/chat/message/read/${id}`, // ✅ updated
         {
           headers: {
             Authorization: `Bearer ${localStorage.getItem("chat-token")}`,
-            "x-user": JSON.stringify(user), // send whole user object
+            "x-user": JSON.stringify(user),
           },
         }
       );
@@ -61,7 +64,7 @@ const Slidebar = ({ setchatInitiated, setChats, setReceiverId }) => {
   };
 
   const filteredUsers = users
-    .filter((user) => user._id !== currentUserId) // Exclude logged-in user
+    .filter((user) => user._id !== currentUserId)
     .filter((user) =>
       user.username.toLowerCase().includes(search.toLowerCase())
     );

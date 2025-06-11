@@ -28,7 +28,7 @@ const SignupForm = () => {
 
     try {
       const response = await axios.post(
-        "http://localhost:3000/api/register",
+        "https://backend-6oku.onrender.com/api/register",
         formData
       );
 

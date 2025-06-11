@@ -13,14 +13,14 @@ const Chats = ({ socket }) => {
   const [receiverName, setReceiverName] = useState("");
   const chatEndRef = useRef(null);
 
-  // Join socket room after user is set (user._id is needed)
+  // Join socket room after user is set
   useEffect(() => {
     if (user?._id) {
       socket.emit("join", user._id);
     }
   }, [user, socket]);
 
-  // Listen for new messages from socket and update chats
+  // Listen for new messages
   useEffect(() => {
     socket.on("newMessage", (message) => {
       setChats((prevChats) => [
@@ -33,13 +33,12 @@ const Chats = ({ socket }) => {
       ]);
     });
 
-    // Cleanup on unmount
     return () => {
       socket.off("newMessage");
     };
   }, [socket]);
 
-  // Verify user token on component mount
+  // Verify user token
   useEffect(() => {
     const verifyToken = async () => {
       const token = localStorage.getItem("chat-token");
@@ -47,7 +46,7 @@ const Chats = ({ socket }) => {
 
       try {
         const res = await axios.post(
-          "http://localhost:3000/api/verify",
+          "https://backend-6oku.onrender.com/api/verify", // ✅ changed
           {},
           {
             headers: {
@@ -73,13 +72,13 @@ const Chats = ({ socket }) => {
     verifyToken();
   }, [navigate]);
 
-  // Fetch receiver's username from receiverId whenever it changes
+  // Fetch receiver name
   useEffect(() => {
     const fetchReceiverName = async () => {
       if (!receiverId) return;
       try {
         const res = await axios.get(
-          `http://localhost:3000/chat/users/${receiverId}`
+          `https://backend-6oku.onrender.com/chat/users/${receiverId}` // ✅ changed
         );
         setReceiverName(res.data.username || "Unknown User");
       } catch (err) {
@@ -90,7 +89,7 @@ const Chats = ({ socket }) => {
     fetchReceiverName();
   }, [receiverId]);
 
-  // Scroll to bottom when chats update
+  // Auto-scroll to bottom
   useEffect(() => {
     chatEndRef.current?.scrollIntoView({ behavior: "smooth" });
   }, [chats]);
@@ -115,7 +114,6 @@ const Chats = ({ socket }) => {
         {user ? (
           chatInitiated ? (
             <div className="flex flex-col h-full justify-between bg-white/10 backdrop-blur-xl rounded-xl p-4 shadow-2xl">
-              {/* Top bar with receiver's name */}
               <div className="border-b border-gray-400 pb-2 mb-4 text-white text-xl font-semibold">
                 Chatting with: {receiverName || "Select a user"}
               </div>
@@ -124,7 +122,6 @@ const Chats = ({ socket }) => {
                 {chats.length > 0 ? (
                   chats.map((msg, index) => {
                     const isMyMessage = msg.sender === user._id;
-
                     return (
                       <div
                         key={index}

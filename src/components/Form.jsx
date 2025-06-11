@@ -18,7 +18,7 @@ const Form = ({ receiverId, setChats, chats }) => {
 
     try {
       const response = await axios.post(
-        `http://localhost:3000/chat/message/send/${receiverId}`,
+        `https://backend-6oku.onrender.com/chat/message/send/${receiverId}`, // ⬅️ changed to localhost
         {
           content: message,
           senderId: userId,
@@ -33,7 +33,7 @@ const Form = ({ receiverId, setChats, chats }) => {
       setChats([...chats, response.data]);
       setMessage("");
     } catch (err) {
-      console.log("error vachindhi", err);
+      console.log("Error sending message:", err);
     }
   };
 
@@ -59,4 +59,3 @@ const Form = ({ receiverId, setChats, chats }) => {
 };
 
 export default Form;
- 
