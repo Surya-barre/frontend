@@ -1,7 +1,7 @@
 import React, { useEffect, useRef, useState } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
-import Slidebar from "../Slidebar.jsX";
+import Slidebar from "../Slidebar.jsx";
 import Form from "../Form";
 
 const Chats = ({ socket }) => {
