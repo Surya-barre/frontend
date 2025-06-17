@@ -1,5 +1,6 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import axios from "axios";
+import PropTypes from "prop-types";
 
 const Form = ({ receiverId, setChats, chats }) => {
   const [message, setMessage] = useState("");
@@ -18,7 +19,7 @@ const Form = ({ receiverId, setChats, chats }) => {
 
     try {
       const response = await axios.post(
-        `https://backend-6oku.onrender.com/chat/message/send/${receiverId}`, // ⬅️ changed to localhost
+        `https://backend-6oku.onrender.com/chat/message/send/${receiverId}`,
         {
           content: message,
           senderId: userId,
@@ -56,6 +57,12 @@ const Form = ({ receiverId, setChats, chats }) => {
       </form>
     </div>
   );
+};
+
+Form.propTypes = {
+  receiverId: PropTypes.string.isRequired,
+  setChats: PropTypes.func.isRequired,
+  chats: PropTypes.array.isRequired,
 };
 
 export default Form;

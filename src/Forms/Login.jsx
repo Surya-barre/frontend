@@ -1,6 +1,6 @@
-import React, { useState } from "react";
+import   { useState } from "react";
 import axios from "axios";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 const Login = () => {
   const navigate = useNavigate();
@@ -75,9 +75,9 @@ const Login = () => {
         </form>
 
         <div className="mt-4 text-center">
-          <a href="/signup" className="text-blue-500 hover:underline">
-            Don't have an account? Sign Up
-          </a>
+          <Link to="/signup" className="text-blue-500 hover:underline">
+            Don&apos;t have an account? Sign Up
+          </Link>
         </div>
       </div>
     </div>

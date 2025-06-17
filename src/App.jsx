@@ -1,5 +1,4 @@
-import React from "react";
-import SignupForm from "./Forms/SignupForm";
+ import SignupForm from "./Forms/SignupForm";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Login from "./Forms/Login";
 import Chats from "./components/pages/Chats";

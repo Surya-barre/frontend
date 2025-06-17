@@ -1,4 +1,5 @@
-import React, { useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
+import PropTypes from "prop-types"; // ✅ Import PropTypes
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import Slidebar from "../Slidebar.jsx";
@@ -46,7 +47,7 @@ const Chats = ({ socket }) => {
 
       try {
         const res = await axios.post(
-          "https://backend-6oku.onrender.com/api/verify", // ✅ changed
+          "https://backend-6oku.onrender.com/api/verify",
           {},
           {
             headers: {
@@ -78,7 +79,7 @@ const Chats = ({ socket }) => {
       if (!receiverId) return;
       try {
         const res = await axios.get(
-          `https://backend-6oku.onrender.com/chat/users/${receiverId}` // ✅ changed
+          `https://backend-6oku.onrender.com/chat/users/${receiverId}`
         );
         setReceiverName(res.data.username || "Unknown User");
       } catch (err) {
@@ -183,6 +184,11 @@ const Chats = ({ socket }) => {
       </div>
     </div>
   );
+};
+
+// ✅ PropTypes added here
+Chats.propTypes = {
+  socket: PropTypes.object.isRequired,
 };
 
 export default Chats;

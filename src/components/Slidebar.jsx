@@ -1,6 +1,7 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
+import PropTypes from "prop-types";
 
 const Slidebar = ({ setchatInitiated, setChats, setReceiverId }) => {
   const navigate = useNavigate();
@@ -13,7 +14,7 @@ const Slidebar = ({ setchatInitiated, setChats, setReceiverId }) => {
     const fetchUsers = async () => {
       try {
         const response = await axios.get(
-          "https://backend-6oku.onrender.com/chat/users", // ✅ updated
+          "https://backend-6oku.onrender.com/chat/users",
           {
             headers: {
               Authorization: `Bearer ${localStorage.getItem("chat-token")}`,
@@ -35,7 +36,7 @@ const Slidebar = ({ setchatInitiated, setChats, setReceiverId }) => {
       const user = JSON.parse(localStorage.getItem("user"));
 
       const response = await axios.get(
-        `https://backend-6oku.onrender.com/chat/message/read/${id}`, // ✅ updated
+        `https://backend-6oku.onrender.com/chat/message/read/${id}`,
         {
           headers: {
             Authorization: `Bearer ${localStorage.getItem("chat-token")}`,
@@ -108,6 +109,12 @@ const Slidebar = ({ setchatInitiated, setChats, setReceiverId }) => {
       </button>
     </div>
   );
+};
+
+Slidebar.propTypes = {
+  setchatInitiated: PropTypes.func.isRequired,
+  setChats: PropTypes.func.isRequired,
+  setReceiverId: PropTypes.func.isRequired,
 };
 
 export default Slidebar;
