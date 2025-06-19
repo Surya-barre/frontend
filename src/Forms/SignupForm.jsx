@@ -1,7 +1,9 @@
 import   { useState } from "react";
 import axios from "axios";
+import { useNavigate } from "react-router-dom";
 
 const SignupForm = () => {
+  const usenavigate=useNavigate();
   const [username, setUsername] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -45,9 +47,7 @@ const SignupForm = () => {
       alert("Signup successful! You can now log in.");
 
       // Optional: redirect to login page
-      setTimeout(() => {
-        window.location.href = "/";
-      }, 1500);
+      usenavigate("/")
     } catch (error) {
       console.error("Error submitting form:", error);
       alert("Signup failed. Please try again.");
